@@ -1,7 +1,8 @@
 const express = require('express');
+const fs = require('fs');
 const path = require('path');
 const PORT = process.env.PORT || 3001;
-const { notes } = require('./data/db');
+const { notes } = require('./db/db');
 
 // Initialize the app and create a port
 const app = express();
@@ -12,6 +13,18 @@ app.use(express.urlencoded({ extended: true }));
 // parse incoming JSON data
 app.use(express.json());
 app.use(express.static('public'));
+
+//functions
+function createNewNote(body, notesArray) {
+    const note = body;
+    notesArray.push(note);
+    fs.writeFileSync(
+        path.join(__dirname, './db/db.json'),
+        JSON.stringify({ notes: notesArray }, null, 2)
+    );
+    return note;
+}
+
 
 //api routes
 app.get('/api/notes', (req, res) => {
@@ -29,6 +42,14 @@ app.get('/notes', (req, res) => {
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, './public/index.html'));
 });
+
+//post new notes
+//TODO: add validation
+app.post('/notes', (req, res) => {
+    const note = createNewNote(req.body, notes);
+    res.json(note);
+});
+
 
 // Start the server on the port
 app.listen(PORT, () => {
