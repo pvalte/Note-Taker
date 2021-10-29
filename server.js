@@ -1,6 +1,7 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
+const { v4: uuidv4 } = require('uuid');
 const PORT = process.env.PORT || 3001;
 const { notes } = require('./db/db');
 
@@ -20,7 +21,7 @@ function createNewNote(body, notesArray) {
     notesArray.push(note);
     fs.writeFileSync(
         path.join(__dirname, './db/db.json'),
-        JSON.stringify({ notes: notesArray }, null, 2)
+        JSON.stringify({ notes: notesArray }, null, 2),
     );
     return note;
 }
@@ -45,7 +46,10 @@ app.get('*', (req, res) => {
 
 //post new notes
 //TODO: add validation
-app.post('/notes', (req, res) => {
+app.post('/api/notes', (req, res) => {
+    // set id based on what the next index of the array will be
+    req.body.id = uuidv4();
+    console.log(req.body);
     const note = createNewNote(req.body, notes);
     res.json(note);
 });
