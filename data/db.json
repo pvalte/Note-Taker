@@ -1,11 +1,11 @@
 {
     "notes": [
       {
-        "id": "0",
+        "title": "This is the first note",
         "text": "Hiiiiiii"
       },
       {
-        "id": "1",
+        "title": "This is the next note",
         "text": "Byeeeeee"      }
     ]
   }
