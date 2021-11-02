@@ -10,6 +10,15 @@ router.get('/notes', (req, res) => {
     res.json(results);
 });
 
+//delete notes
+router.delete('/notes/:id', (req, res) => {
+    if (deleteNote(req.params.id, notes)) {
+        res.json({ ok: true});
+    } else {
+        res.status(500).json(err);        
+    }
+});
+
 //post new notes
 router.post('/notes', (req, res) => {
     // set id based on what the next index of the array will be
