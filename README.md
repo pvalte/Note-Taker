@@ -6,7 +6,7 @@
 Application to create, save, and delete notes.
 Built using JavaScript, HTML, and CSS on the front-end; Node.js and Express.js on the back-end.
 
-Deployed Application: https://pvalte.github.io/Note-Taker/
+Deployed Application: https://obscure-ridge-55934.herokuapp.com/
 
 Screenshot of Site: 
 ![image](https://user-images.githubusercontent.com/86697117/139963270-c4c0515e-352d-435a-84ce-0efc88bbd30a.png)
