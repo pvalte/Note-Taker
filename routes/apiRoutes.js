@@ -3,19 +3,19 @@ const { notes } = require('../db/db.json');
 const router = require('express').Router();
 const { v4: uuidv4 } = require('uuid');
 
-//api routes
+//get notes
 router.get('/notes', (req, res) => {
     let results = notes;
-    
+
     res.json(results);
 });
 
 //delete notes
 router.delete('/notes/:id', (req, res) => {
     if (deleteNote(req.params.id, notes)) {
-        res.json({ ok: true});
+        res.json({ ok: true });
     } else {
-        res.status(500).json(err);        
+        res.status(500).json(err);
     }
 });
 
@@ -33,4 +33,4 @@ router.post('/notes', (req, res) => {
     }
 });
 
-module.exports  = router;
+module.exports = router;
